@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<review xmlns="http://plugins.intellij.net/revu" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://plugins.intellij.net/revu http://plugins.intellij.net/revu/ns/revu_1_0.xsd" name="demoreview" status="reviewing" shared="false">
+  <history createdBy="peekler" lastUpdatedBy="peekler" createdOn="2016-02-15 14:47:36 +0100" lastUpdatedOn="2016-02-15 14:47:50 +0100"/>
+  <goal>review</goal>
+  <referential>
+    <priorities/>
+    <tags/>
+    <users>
+      <user displayName="peekler" login="peekler" roles="admin,reviewer,author"/>
+    </users>
+  </referential>
+  <filescope pathPattern="file[*]:*//*"/>
+  <issues>
+    <issue filePath="app/src/main/java/hu/bme/aut/android/aithelloworld/MainActivity.java" summary="miért private?" lineStart="19" lineEnd="19" hash="175236292" status="to_resolve">
+      <history createdBy="peekler" lastUpdatedBy="peekler" createdOn="2016-02-15 14:49:36 +0100" lastUpdatedOn="2016-02-15 14:49:36 +0100"/>
+    </issue>
+  </issues>
+</review>
