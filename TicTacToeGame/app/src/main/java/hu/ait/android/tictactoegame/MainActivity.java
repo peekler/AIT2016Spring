@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import hu.ait.android.tictactoegame.view.TicTacToeView;
 
@@ -26,5 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 gameField.clearGameField();
             }
         });
+    }
+
+    public void showMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }
