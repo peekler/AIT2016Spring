@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TicTacToeGame</string>
+    <string name="btn_restart">Újraindítás</string>
+
+</resources>

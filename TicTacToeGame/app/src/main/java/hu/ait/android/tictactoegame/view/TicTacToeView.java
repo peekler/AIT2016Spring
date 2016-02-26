@@ -124,8 +124,10 @@ public class TicTacToeView extends View {
                 String nextPlayer =
                         TicTacToeModel.getInstance().getNextPlayer() ==
                                 TicTacToeModel.CIRCLE ? "O" : "X";
-                ((MainActivity)getContext()).showMessage("Next player is: "+nextPlayer);
 
+                ((MainActivity)getContext()).showSnackBarMessage(
+                        getContext().getString(R.string.text_next_player,
+                                nextPlayer, 100));
 
                 invalidate(); // redraws the view -> calls the onDraw indirectly
             }

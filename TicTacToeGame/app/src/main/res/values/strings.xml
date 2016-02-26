@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TicTacToeGame</string>
+    <string name="btn_restart">Restart</string>
+    <string name="text_welcome">Game started!</string>
+    <string name="text_next_player">"The winner is: %1$s, score: %2$d"</string>
+    <string name="action_cancel">Cancel</string>
+
 </resources>
