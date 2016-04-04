@@ -8,14 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import hu.bme.android.todorecyclerview.R;
 import hu.bme.android.todorecyclerview.data.Todo;
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
+public class TodoAdapter
+        extends RecyclerView.Adapter<TodoAdapter.ViewHolder>
+        implements TodoTouchHelperAdapter {
 
     private Context context;
     private List<Todo> todos = new ArrayList<Todo>();
@@ -36,15 +40,69 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.tvTodo.setText(todos.get(position).getTodo());
         holder.cbDone.setChecked(todos.get(position).isDone());
+
+        holder.cbDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Todo todo = todos.get(position);
+                todo.setDone(holder.cbDone.isChecked());
+
+                // we will save/update todo object in the DataBase here
+
+                Toast.makeText(context,
+                        todo.getTodo()+": "+
+                        todo.isDone(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return todos.size();
     }
+
+    public void addTodo(Todo todo) {
+        todos.add(0, todo);
+
+        // ths refreshes the whole list
+        notifyDataSetChanged();
+
+        // this refreshes only the first item, more optimal!
+        //notifyItemInserted(0);
+    }
+
+    public void removeTodo(int position) {
+        todos.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        todos.remove(position);
+        notifyDataSetChanged();
+
+        //notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(todos, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(todos, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTodo;
