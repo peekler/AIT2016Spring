@@ -1,8 +1,13 @@
 package hu.bme.android.todorecyclerview.data;
 
-public class Todo {
+import com.orm.SugarRecord;
+
+public class Todo extends SugarRecord {
     private String todo;
     private boolean done;
+
+    public Todo() {
+    }
 
     public Todo(String todo, boolean done) {
         this.todo = todo;

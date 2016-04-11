@@ -26,9 +26,13 @@ public class TodoAdapter
 
     public TodoAdapter(Context context) {
         this.context = context;
-        for (int j = 0; j < 20; j++) {
+
+
+        todos = Todo.listAll(Todo.class);
+
+        /*for (int j = 0; j < 20; j++) {
             todos.add(new Todo("Todo " + j, false));
-        }
+        }*/
     }
 
     @Override
@@ -50,6 +54,8 @@ public class TodoAdapter
                 Todo todo = todos.get(position);
                 todo.setDone(holder.cbDone.isChecked());
 
+                todo.save();
+
                 // we will save/update todo object in the DataBase here
 
                 Toast.makeText(context,
@@ -69,6 +75,8 @@ public class TodoAdapter
     public void addTodo(Todo todo) {
         todos.add(0, todo);
 
+        todo.save();
+
         // ths refreshes the whole list
         notifyDataSetChanged();
 
@@ -77,16 +85,14 @@ public class TodoAdapter
     }
 
     public void removeTodo(int position) {
+        todos.get(position).delete();
         todos.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
     public void onItemDismiss(int position) {
-        todos.remove(position);
-        notifyDataSetChanged();
-
-        //notifyItemRemoved(position);
+        removeTodo(position);
     }
 
     @Override
