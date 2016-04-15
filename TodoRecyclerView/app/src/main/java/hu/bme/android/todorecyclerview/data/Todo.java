@@ -2,7 +2,9 @@ package hu.bme.android.todorecyclerview.data;
 
 import com.orm.SugarRecord;
 
-public class Todo extends SugarRecord {
+import java.io.Serializable;
+
+public class Todo extends SugarRecord implements Serializable {
     private String todo;
     private boolean done;
 

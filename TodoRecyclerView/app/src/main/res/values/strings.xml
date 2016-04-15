@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TodoRecyclerView</string>
+    <string name="menu_add_todo">Add todo</string>
+    <string name="hint_add_todo">Todo text</string>
+    <string name="cb_is_done">Is done</string>
+    <string name="button_save">Save</string>
+    <string name="error_field_empty">This field can not be empty!</string>
+    <string name="button_edit">Edit</string>
+    <string name="text_cancelled">Action cancelled</string>
 </resources>

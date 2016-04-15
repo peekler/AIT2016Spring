@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import hu.bme.android.todorecyclerview.MainActivity;
 import hu.bme.android.todorecyclerview.R;
 import hu.bme.android.todorecyclerview.data.Todo;
 
@@ -64,7 +66,12 @@ public class TodoAdapter
                         Toast.LENGTH_SHORT).show();
             }
         });
-
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) context).showEditTodoActivity(todos.get(position), position);
+            }
+        });
     }
 
     @Override
@@ -90,6 +97,12 @@ public class TodoAdapter
         notifyItemRemoved(position);
     }
 
+    public void updateTodo(int index, Todo todo) {
+        todos.set(index, todo);
+        todo.save();
+        notifyItemChanged(index);
+    }
+
     @Override
     public void onItemDismiss(int position) {
         removeTodo(position);
@@ -113,12 +126,14 @@ public class TodoAdapter
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvTodo;
         private CheckBox cbDone;
+        private Button btnEdit;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvTodo = (TextView) itemView.findViewById(R.id.tvTodo);
             cbDone = (CheckBox) itemView.findViewById(R.id.cbDone);
+            btnEdit = (Button) itemView.findViewById(R.id.btnEdit);
         }
     }
 
