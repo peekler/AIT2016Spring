@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.backendless:backendless:3.0.11'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.specyci:residemenu:1.6+'
+    compile 'com.github.dmytrodanylyk.circular-progress-button:library:1.1.3'
 }

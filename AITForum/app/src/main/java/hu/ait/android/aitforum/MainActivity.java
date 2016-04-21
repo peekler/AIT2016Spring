@@ -8,9 +8,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.backendless.Backendless;
-import com.backendless.BackendlessUser;
+import com.backendless.BackendlessCollection;
 import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
+
+import java.util.Iterator;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,41 +33,59 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Backendless.initApp(
-                this,
-                "3008C063-BD5D-431E-FF84-10120E875600",
-                "027282C4-27C9-5AA9-FFCF-E61EA845A600",
-                "v1");
     }
 
-
     @OnClick(R.id.btnSend)
-    public void sendBtnPressed(View v) {
+    public void sendClick(View v) {
+        // save the message on BaaS
         ForumMessage message = new ForumMessage();
         message.setSender("Peter");
-        message.setMessage(etMessage.getText().toString());
+        message.setMessageText(etMessage.getText().toString());
 
-        Backendless.Persistence.save(message , new BackendlessCallback<ForumMessage>()
-        {
+        Backendless.Persistence.save(message,
+                new BackendlessCallback<ForumMessage>() {
             @Override
-            public void handleResponse( ForumMessage message )
-            {
-                Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
+            public void handleResponse(ForumMessage response) {
+                Toast.makeText(MainActivity.this,
+                        "Message saved", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void handleFault(BackendlessFault fault) {
-                Toast.makeText(MainActivity.this, "Fault: "+fault.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,
+                        "Error: "+fault.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
-        } );
+        });
     }
 
-    private void registerUser() {
-        BackendlessUser user = new BackendlessUser();
-        user.setEmail( "michael@backendless.com" );
-        user.setPassword( "my_super_password" );
+    @OnClick(R.id.btnRefresh)
+    public void refreshButtonClick(View v) {
+        refreshMessages();
+    }
 
-        Backendless.UserService.register( user);
+    public void refreshMessages() {
+        Backendless.Persistence.of(ForumMessage.class).find(new BackendlessCallback<BackendlessCollection<ForumMessage>>() {
+            @Override
+            public void handleResponse(
+                    BackendlessCollection<ForumMessage> response) {
+
+                Iterator<ForumMessage> messageIterator =
+                        response.getCurrentPage().iterator();
+
+                StringBuffer messageBuffer = new StringBuffer();
+
+                while (messageIterator.hasNext()) {
+                    ForumMessage message = messageIterator.next();
+
+                    // use the message
+                    messageBuffer.append("<"+message.getSender()+"> "+
+                    message.getMessageText()+"\n");
+                }
+
+                tvMessages.setText(messageBuffer.toString());
+            }
+        });
     }
 
 }

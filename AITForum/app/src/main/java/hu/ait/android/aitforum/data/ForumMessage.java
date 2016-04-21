@@ -2,11 +2,16 @@ package hu.ait.android.aitforum.data;
 
 public class ForumMessage {
 
-    String objectId;
-    String sender;
-    String message;
+    private String messageText;
+    private String sender;
 
-    public ForumMessage(){}
+    public String getMessageText() {
+        return messageText;
+    }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
 
     public String getSender() {
         return sender;
@@ -16,19 +21,5 @@ public class ForumMessage {
         this.sender = sender;
     }
 
-    public String getMessage() {
-        return message;
-    }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
 }
