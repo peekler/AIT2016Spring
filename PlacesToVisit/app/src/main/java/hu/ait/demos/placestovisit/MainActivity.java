@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -172,7 +173,17 @@ public class MainActivity extends AppCompatActivity {
         Snackbar.make(layoutContent,
                 message,
                 Snackbar.LENGTH_LONG
-        ).setAction(R.string.action_hide, new View.OnClickListener() {
+        ).setCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                Toast.makeText(MainActivity.this, "DISMISSED", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onShown(Snackbar snackbar) {
+                super.onShown(snackbar);
+                Toast.makeText(MainActivity.this, "ONSHOWN", Toast.LENGTH_SHORT).show();
+            }
+        }).setAction(R.string.action_hide, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //...
