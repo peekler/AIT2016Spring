@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\Development\\_VersionControlled\\GIT\\AIT\\2016Spring\\23\\WidgetTest\\app\\build\\intermediates\\res\\merged\\debug\\layout\\my_widget_layout.xml",
+        "source": "D:\\Development\\_VersionControlled\\GIT\\AIT\\2016Spring\\23\\WidgetTest\\app\\src\\main\\res\\layout\\my_widget_layout.xml"
+    },
+    {
+        "merged": "D:\\Development\\_VersionControlled\\GIT\\AIT\\2016Spring\\23\\WidgetTest\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\Development\\_VersionControlled\\GIT\\AIT\\2016Spring\\23\\WidgetTest\\app\\src\\main\\res\\layout\\activity_main.xml"
+    }
+]
