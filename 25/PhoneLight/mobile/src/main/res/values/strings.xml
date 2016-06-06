@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">PhoneLight</string>
-    <string name="txt_failed_to_switch">"Status code: "</string>
-</resources>
